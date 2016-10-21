@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="jquery.js"></script>
+        <title>JQuery Memory Game</title>
+        <script type="text/javascript">
+		var boxopened = ""; //casilla abierta
+        var imgopened = ""; //Imagen abierta
+        var count = 0; //Numero de intentos
+        var found =  0; //Numero de imagenes encontradas
+
+		//Funcion para calcular un numero aleatorio (Desde, Hasta)	
+        function randomFromTo(from, to){
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+		//-------------------------------------------
+		//Baraja las fichas. Las asigna aleatoriamente
+        function shuffle() {
+
+			//Crea un array para añadir todas las imagenes
+            var array_img = new Array();
+
+			
+			//Recorre todas las casillas
+			$("#boxcard div").each(function(idx,elem){
+				//Asigna al array de imagenes el nombre de la imagen 	asignada actualemnte
+                array_img[idx] = $(elem).children().first().attr("src");
+			
+			});
+
+
+			//Vuelve a recorrer todas las casillas
+			$("#boxcard div").each(function(idx,elem){
+				//Calcula un numero aleatorio del 0 hasta el tamaño del array de imagenes
+                randIndex = randomFromTo(0, array_img.length - 1);
+				//Establece una nueva imagen a la casilla cogiendola del array de imagenes
+				$(elem).children().first().attr("src", array_img[randIndex]);
+				
+				//Quitamos del array de imagenes la imagen utilizada
+                array_img.splice(randIndex, 1);
+			
+			});
+
+        }
+
+		//-------------------------------------
+		//Reinicia Partida
+        function resetGame() {
+            shuffle();//Barajar de nuevo
+            $("img").hide(); //Oculta todas las imagenes
+            $("img").removeClass("opacity");//Quita la clase de opacidad
+            count = 0;//Reinicia contador
+            $("#msg").remove(); //Elimina la capa mensaje
+            $("#count").html("" + count); //Reinicia el contador de clicks
+            boxopened = "";//Reinicia casilla abierta
+            imgopened = "";//Reinicia imagen abierta
+            found = 0; //Reinicia encontradas
+            return false;
+        }
+
+		//------------------------------------------
+		//Carga inicial del programa
+        $(document).ready(function() {
+            $("img").hide();//Oculta todas las imagenes
+            $("#boxcard div").click(openCard);//En caso de hacer click a las casillas llama a la funcion openCard
+
+			//Baraja las casillas
+            shuffle();
+
+			//Funcion de hacer click en la casilla	
+            function openCard() {
+
+                //Toma el id de la casilla pulsada
+				id = $(this).attr("id");
+				
+				//Pregunta si esta oculta 
+                if ($("#"+id+" img").is(":hidden")) {
+					
+					//Deshabilita la funcion click openCard
+					//para evitar que se pulse
+                    $("#boxcard div").unbind("click", openCard);
+
+					//muestra la imagen mediante fast
+                    $("#"+id+" img").slideDown('fast');
+
+					//Si es la primera imagen del par
+					if (imgopened == "") {
+						//Guarda el id de la casilla 
+                        boxopened = id; 						
+						//Guarda el src de la imagen pulsada
+                        imgopened = $("#"+id+" img").attr("src");
+						//Vuelve a activar la funcion click a las casillas
+                        setTimeout(function() {
+                            $("#boxcard div").bind("click", openCard)
+                        }, 300);						
+					//Si no comprueba con la segunda
+                    } else {
+						//Guarda el nombre de la imagen segunda
+                        currentopened = $("#"+id+" img").attr("src");
+						//Lo compara con la primera 
+						//Si son diferentes
+                        if (imgopened != currentopened) {
+                            // Cierra de nuevo con efecto y reinicia variables
+                            setTimeout(function() {
+                                $("#"+id+" img").slideUp('fast');
+                                $("#"+boxopened+" img").slideUp('fast');
+                                boxopened = "";
+                                imgopened = "";
+                            }, 400);
+						//Si son iguales
+                        } else {
+                            // le aplica clase de opacidad a las dos imagenes							
+                            $("#"+id+" img").addClass("opacity");
+							
+                            $("#"+boxopened+" img").addClass("opacity");
+							//Incrementa el contador de encontrado
+                            found++;
+							//Reinicia las variables de casilla abierta e imagen abierta
+                            boxopened = "";
+                            imgopened = "";
+                        }
+                        
+						//Desactiva de nuevo el click						
+                        setTimeout(function() {
+                            $("#boxcard div").bind("click", openCard)
+                        }, 400);
+                    }
+
+					//Incrementa numero de clicks y lo escribe
+                    count++;
+                    $("#count").html("" + count);
+
+					//Si llegamos al numero de parejas encontradas
+                    if (found == 5) {
+						//Crea una capa nueva y se la anade a la capa
+						//link
+                        msg = '<span id="msg">Congrats ! You Found All Sushi With </span>';
+                        $("span.link").prepend(msg);
+                    }
+                }
+            }
+        });
+        </script>
+        <style type="text/css">
+            * {
+                font-family: Arial, "Free Sans";
+            }
+
+            #boxcard {
+                margin: 0 auto;
+                width: 625px;
+                z-index: 1;
+            }
+
+            #boxcard div {
+                float: left;
+                width: 100px;
+                height: 100px;
+                background: #d9d9d9;
+                margin: 5px;
+                padding: 5px;
+                border: 1px solid #999;
+                cursor: pointer;
+                -webkit-border-radius: .5em;
+                -moz-border-radius: .5em;
+                border-radius: .5em;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.5);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.5);
+                box-shadow: 0 1px 2px rgba(0,0,0,.5);
+                z-index: 2;
+            }
+
+            #boxcard div img {
+                border: none;
+                z-index: 3;
+            }
+
+            .opacity {
+                opacity: .6;
+                filter: alpha(opacity=60);
+            }
+
+            #boxbutton {
+                text-align: center;
+                padding: 20px;
+            }
+            .link {
+                font-size: 18px;
+                color: #ffffff;
+                text-decoration: none;
+                background: #0066cc;
+                padding: 5px 10px;
+                -webkit-border-radius: .5em;
+                -moz-border-radius: .5em;
+                border-radius: .5em;
+            }
+            .link:hover {
+                background: #999;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="boxbutton">
+            <span class="link">
+                <span id="count">0</span>
+                Click
+            </span>
+            &nbsp;
+            <a href="javascript:" class="link" onclick="resetGame();">Reset</a>
+        </div>
+        <div id="boxcard">
+            <div id="card1"><img src="img/01.jpg"" /></div>
+            <div id="card2"><img src="img/02.jpg"" /></div>
+            <div id="card3"><img src="img/03.jpg"" /></div>
+            <div id="card4"><img src="img/04.jpg"" /></div>
+            <div id="card5"><img src="img/05.jpg"" /></div>
+            <div id="card6"><img src="img/01.jpg"" /></div>
+            <div id="card7"><img src="img/02.jpg"" /></div>
+            <div id="card8"><img src="img/03.jpg"" /></div>
+            <div id="card9"><img src="img/04.jpg"" /></div>
+            <div id="card10"><img src="img/05.jpg"" /></div>
+        </div>
+    </body>
+</html>

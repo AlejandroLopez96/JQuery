@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8"/>
+		<title> Ejercicio instrumentos </title>
+		<script src="jquery-3.1.1.min.js"></script>
+		<script> 
+			$(document).ready(function(){
+				
+					$("#do").addClass("do notas");
+					$("#re").addClass("re notas");
+					$("#mi").addClass("mi notas");
+				
+				
+				$(".notas").hover(function(){
+					$(this).animate({
+						opacity: '0.5',
+						height: '150px',
+						width: '150px'
+					},"fast");
+				});
+				
+				$(".notas").mouseleave(function(){
+					$(this).animate({
+						opacity: '1',
+						height: '100px',
+						width: '100px'
+					});
+					var nota = $(this).text();
+					$("#notasM").append(nota);
+				});
+				
+				$("#btnQuitaPon").click(function(){
+					var notaMusical = $("#listaNotas option:selected").val();
+					$("#" + notaMusical).toggle();
+				});
+				
+				$("#plega").click(function(){
+					$(".notas").slideUp("slow");
+					$("#plega").attr("id","despliega");
+					$("#despliega").text("Desplegar");
+					$("#despliega").click(function(){
+						$(".notas").slideDown("slow");
+						$("#despliega").attr("id","plega");
+						$("#plega").text("Plegar");
+				});
+
+				
+				});
+				
+				
+				$("#piano").click(function(){
+					$(".notas:even").css("background-color", "white");
+					$(".notas:odd").css("background-color", "black");
+					$(".notas:odd").css("color", "white");
+					/*$("#piano").attr("id","xilofono");
+					$("#xilofono").text("Xilofono");
+						$("#xilofono").click(function(){
+							$("#do").css("background-color", "red");
+							$("#re").css("background-color", "orange");
+							$("#mi").css("background-color", "yellow");
+							$("#xilofono").attr("id","piano");
+							$("#piano").text("Piano");
+						});*/
+				});
+				
+				$("#guitarra").click(function (){
+					$("td").each(function (i){
+					var alto = 100+(50*i);
+						$(this).animate({width:"100px",height:alto+"px"},"fast")
+					});
+				});
+			});
+
+		</script>
+		
+		<style>
+			td {
+				width: 100px;
+				height: 100px;
+				display: block;
+				float: left;
+				border: 1px solid black;
+			}
+			
+			#do{
+				background-color: red;	
+			}
+			#re{
+				background-color: orange;
+			}
+			#mi{
+				background-color: yellow;
+			}
+			
+			#notasM{
+				position: absolute;
+				top: 240px;
+			}
+			
+			#botones{
+				position: absolute;
+				top: 200px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<table>
+			<tr>
+				<td id="do">Do</td>
+				<td id="re">Re</td>
+				<td id="mi">Mi</td>
+			</tr>
+		</table>
+		
+		<div id="botones">
+			<select name="listaNotas" id="listaNotas">
+			  <option value="do">do</option>
+			  <option value="re">re</option>
+			  <option value="mi">mi</option>
+			</select>
+			<button type="button" id="btnQuitaPon">Quitar/Poner</button>
+			<button type="button" id="plega">Plegar</button>
+			<button type="button" id="piano">Piano</button>
+			<button type="button" id="guitarra">Guitarra</button>
+		</div>
+		<div id="notasM"></div> 
+
+	</body>
+
+</html>

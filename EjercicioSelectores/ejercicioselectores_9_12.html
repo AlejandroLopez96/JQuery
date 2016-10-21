@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<style>
+.titulo{
+	background-color:#EF6977;
+}
+#informacion{
+	border:1px solid black;
+}
+
+</style>
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	//ejercicio 9
+	//pendiente de buscar otra solucion
+	$("#listado tr:odd td").mouseenter(function(){
+		$(this).append("*");
+	});
+	
+	//ejercicio 10
+	$("#ejercicio10").click(function() {
+		$("p.titulo").width(200);
+	});	
+	
+	//ejercicio 11
+	$("#foto34").mousemove(function(e){
+		$("#informacion").text(e.pageX + "," + e.pageY);
+	});
+	
+	$("#foto34").mouseleave(function(){
+		$("#informacion").empty();
+	});
+	
+	
+	
+	//ejercicio 12
+	$("#ejercicio12").click(function() {
+		$("span.minoticia,p.minoticia").css("background-color","#EF6977");
+	});
+
+	
+	
+
+});//ready
+</script>
+</head>
+
+<body>
+Ejercicio 9
+<table id="listado" border="1">
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+<tr><td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+<td>a</td><td>a</td><td>a</td><td>a</td>
+</tr>
+</table>
+<hr>
+<p class="titulo">dksajdlksajd</p>
+<p class="titulo">dksajdlksajd</p>
+<p class="titulo">dksajdlksajd</p>
+<p class="titulo">dksajdlksajd</p>
+<p class="titulo">dksajdlksajd</p>
+<p class="titulo">dksajdlksajd</p>
+<button id="ejercicio10">Ejercicio 10</button>
+
+<hr>
+Ejercicio 11
+<img src="http://iescampanillas.com/wp-content/uploads/2014/06/citic_iescampanillas.jpg" id="foto34">
+<div id="informacion"></div>
+
+<hr>
+
+
+<div class="minoticia">blabla</div>
+<span class="minoticia">blabla</span>
+<span class="minoticia">blabla</span>
+<span class="minoticia">blabla</span>
+<p class="minoticia">blabla</p>
+<p class="minoticia">blabla</p>
+<p class="minoticia">blabla</p>
+<p class="minoticia">blabla</p>
+<button id="ejercicio12">Ejercicio 12</button>
+
+</body>
+</html>

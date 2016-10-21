@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<script src="jquery-3.1.1.slim.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	//ejercicio 5
+	$("#ejercicio5").click(function() {
+		var contenido = $("#alumno_3").attr("href");
+		$("#enlace").html("<b>hola</b>");
+	});
+	
+	//ejercicio 6
+	$("#ejercicio6").click(function() {
+		$("#micapa p:first").html("<b>primero</b>");
+	});
+	
+	
+	//ejercicio 7
+	$("#ejercicio7").click(function() {
+		$("#noticias a:last").attr("href","info.html");
+	});
+	//ejercicio 8
+	$("#ejercicio8").click(function() {
+		$(".noticias span:eq(14)").css("color","red");
+	});
+	
+});//ready
+</script>	
+</head>
+
+<body>
+<a id="alumno_3" href="http://www.iescampanillas.es">Alumno 3</a><br>
+<div id="enlace"></div>
+<button id="ejercicio5">Ejercicio 5</button>
+
+
+<div id="micapa">
+<p>blab bla bla bla bla</p>
+<p>blab bla bla bla bla</p>
+<p>blab bla bla bla bla</p>
+<p>blab bla bla bla bla</p>
+<p>blab bla bla bla bla</p>
+</div>
+<button id="ejercicio6">Ejercicio 6</button>
+
+<div id="noticias">
+<a href="enlace1">enlace1</a>
+<a href="enlace2">enlace2</a>
+<a href="enlace3">enlace3</a>
+<a href="enlace4">enlace4</a>
+<a href="enlace5">enlace5</a><br>
+<button id="ejercicio7">Ejercicio 7</button>
+</div>
+
+<div class="noticias">
+<span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span><span>a</span>
+<button id="ejercicio8">Ejercicio 8</button>
+</div>
+
+</body>
+</html>

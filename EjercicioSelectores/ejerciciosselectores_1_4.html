@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<script src="jquery-3.1.1.slim.min.js"></script>
+<script>
+$(document).ready(function(){
+	//ejercicio 1
+	$("#ejercicio1").click(function() {
+        //Para el elemento que tenga id=myformulario
+        //busca sus campos input que tenga
+        //como propiedad name='nombre'
+        //le cambiamos su css de fondo a verde
+		$("#myformulario :input[name='nombre']").css("background-color","green");
+    });
+	
+	
+	//ejercicio 2
+	$("#ejercicio2").click(function(e) {
+		$("#menu ol.listamenu").hide(1000);
+	});
+
+	//ejercicio 3
+	$("#ejercicio3").click(function(e) {
+		$("#pie :contains('Done by')").css("text-decoration","none");
+	});
+	
+	//ejercicio 4
+	$("#misdatos :checkbox").hide();
+		
+	$("#ejercicio4").click(function(){		
+		$("#misdatos :checkbox").show();
+	});
+
+});//ready
+
+
+
+
+</script>
+</head>
+
+<body>
+<form id="myformulario">
+Nombre: <input type="text" name="nombre" >
+</form>
+<button id="ejercicio1">Ejercicio 1</button>
+
+<div id="menu">
+<ol class="listamenu">
+	<li>uno</li>
+    <li>dos</li>
+    <li>tres</li>
+</ol>
+<ol>
+	<li>uno</li>
+    <li>dos</li>
+    <li>tres</li>
+</ol>
+<ul class="listamenu">
+	<li>uno</li>
+    <li>dos</li>
+    <li>tres</li>
+</ul>
+<ol class="listamenu">
+	<li>uno</li>
+    <li>dos</li>
+    <li>tres</li>
+</ol>
+</div>
+<button id="ejercicio2">Ejercicio 2</button>
+
+
+<div id="pie"><span id="texto" style="text-decoration:underline">dsfdsfdsa</span><br>
+<a href="#">Done by:pepito</a></div>
+<button id="ejercicio3">Ejercicio 3</button>
+
+
+<form id="misdatos">
+Opcion 1: <input type="checkbox" name="opcion1">
+Opcion 2: <input type="checkbox" name="opcion2" >
+Opcion 3: <input type="checkbox" name="opcion3" >
+</form>
+<input type="button" id="ejercicio4" value="Hobby">
+
+
+
+</body>
+</html>
